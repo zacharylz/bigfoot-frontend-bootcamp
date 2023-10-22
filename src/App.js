@@ -1,20 +1,22 @@
 import React from "react";
-import logo from "./logo.png";
-import "./App.css";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Home from "./pages/Home";
+import SightingDetails from "./pages/SightingDetails";
 
-class App extends React.Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-        </header>
-      </div>
-    );
-  }
-}
+const App = () => {
+  return (
+    <div className="App">
+      <Router>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route
+            path="/sightings/:report_number"
+            element={<SightingDetails />}
+          />
+        </Routes>
+      </Router>
+    </div>
+  );
+};
 
 export default App;
