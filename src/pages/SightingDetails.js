@@ -25,8 +25,34 @@ const SightingDetails = () => {
         Return to Home
       </div>
       <div className="flex flex-col max-w-screen-xl w-full py-4 gap-4 mt-4">
-        {/* Report Details */}
+        {/* For SQL version */}
         <div className="flex flex-col w-full">
+          <div className="text-xl font-bold text-gray-600 mb-6">
+            Report Details
+          </div>
+          <div className="flex flex-col w-full ml-6 gap-4">
+            <div className="flex flex-col gap-2">
+              <div className="font-semibold text-gray-600 w-[150px]">
+                Report ID:
+              </div>
+              <div>{sighting.id ? sighting.id : "-"}</div>
+            </div>
+            <div className="flex flex-col gap-2">
+              <div className="font-semibold text-gray-600 w-[150px]">
+                Sighting Date:
+              </div>
+              <div>{sighting.date ? sighting.date.substring(0, 10) : "-"}</div>
+            </div>
+            <div className="flex flex-col gap-2">
+              <div className="font-semibold text-gray-600 w-[150px]">
+                Sighting Details:
+              </div>
+              <div>{sighting.notes ? sighting.notes : "-"}</div>
+            </div>
+          </div>
+        </div>
+        {/* Report Details */}
+        {/* <div className="flex flex-col w-full">
           <div className="text-xl font-bold text-gray-600 mb-2">
             Report Details
           </div>
@@ -44,9 +70,9 @@ const SightingDetails = () => {
               <div>{sighting.REPORT_CLASS ? sighting.REPORT_CLASS : "-"}</div>
             </div>
           </div>
-        </div>
+        </div> */}
         {/* Location */}
-        <div className="flex flex-col w-full">
+        {/* <div className="flex flex-col w-full">
           <div className="text-xl font-bold text-gray-600 mb-2">Location</div>
           <div className="flex flex-col w-full ml-6 gap-1">
             <div className="flex gap-2">
@@ -70,9 +96,9 @@ const SightingDetails = () => {
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
         {/* Date */}
-        <div className="flex flex-col w-full">
+        {/* <div className="flex flex-col w-full">
           <div className="text-xl font-bold text-gray-600 mb-2">Date</div>
           <div className="flex flex-col w-full ml-6 gap-1">
             <div className="flex gap-2">
@@ -98,9 +124,9 @@ const SightingDetails = () => {
               <div>{sighting.SEASON ? sighting.SEASON : "-"}</div>
             </div>
           </div>
-        </div>
+        </div> */}
         {/* Observations */}
-        <div className="flex flex-col w-full">
+        {/* <div className="flex flex-col w-full">
           <div className="text-xl font-bold text-gray-600 mb-2">
             Observations
           </div>
@@ -122,7 +148,7 @@ const SightingDetails = () => {
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   );

@@ -6,18 +6,21 @@ const SightingCard = ({ sighting }) => {
 
   return (
     <div
-      onClick={() => navigate(`/sightings/${sighting.REPORT_NUMBER}`)}
+      onClick={() => navigate(`/sightings/${sighting.id}`)}
+      // onClick={() => navigate(`/sightings/${sighting.REPORT_NUMBER}`)}
       className="flex flex-col w-full border-[1px] rounded-sm py-1 px-2 cursor-pointer hover:ring-inset hover:ring-2 hover:ring-blue-900"
     >
       <div className="font-semibold text-gray-800">
-        Report {sighting.REPORT_NUMBER} - {sighting.REPORT_CLASS}
+        Report {sighting.id}
+        {/* Report {sighting.REPORT_NUMBER} - {sighting.REPORT_CLASS} */}
       </div>
       <div className="flex justify-between">
-        <div>
+        {/* <div>
           {sighting.STATE}, {sighting.COUNTY}
-        </div>
+        </div> */}
         <div>
-          {sighting.YEAR}, {sighting.SEASON}
+          {sighting.date.substring(0, 10)}
+          {/* {sighting.YEAR}, {sighting.SEASON} */}
         </div>
       </div>
     </div>

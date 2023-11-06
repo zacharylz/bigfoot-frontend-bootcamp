@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import SightingDetails from "./pages/SightingDetails";
+import AddSighting from "./pages/AddSighting";
 
 const App = () => {
   return (
@@ -13,6 +14,7 @@ const App = () => {
             path="/sightings/:report_number"
             element={<SightingDetails />}
           />
+          <Route path="/new" element={<AddSighting />} />
         </Routes>
       </Router>
     </div>
