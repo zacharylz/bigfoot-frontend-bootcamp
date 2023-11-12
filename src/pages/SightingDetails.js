@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { getSpecificSighting } from "../api/backend";
+import { getSpecificSighting, getSpecificComments } from "../api/backend";
 import { useParams, useNavigate } from "react-router-dom";
+import CommentForm from "../components/CommentForm";
 
 // const SightingDetails = ({ report_number }) => {
 const SightingDetails = () => {
   const [sighting, setSighting] = useState({});
+  const [comments, setComments] = useState([]);
   const { report_number } = useParams();
   const navigate = useNavigate();
 
@@ -12,6 +14,8 @@ const SightingDetails = () => {
     const fetchData = async () => {
       const sightingDetails = await getSpecificSighting(report_number);
       setSighting(sightingDetails.data);
+      const commentDetails = await getSpecificComments(report_number);
+      setComments(commentDetails.data);
     };
     fetchData();
   }, []);
@@ -49,6 +53,19 @@ const SightingDetails = () => {
               </div>
               <div>{sighting.notes ? sighting.notes : "-"}</div>
             </div>
+          </div>
+          <div className="text-xl font-bold text-gray-600 my-6">Comments</div>
+
+          <div className="flex flex-col-reverse w-full ml-6 gap-4">
+            {comments.map((comment) => (
+              <div className="flex flex-col">
+                <div className="text-gray-600 text-sm">
+                  Posted on: {comment.date.substring(0, 10)}
+                </div>
+                <div>{comment.content}</div>
+              </div>
+            ))}
+            <CommentForm report_number={report_number} />
           </div>
         </div>
         {/* Report Details */}

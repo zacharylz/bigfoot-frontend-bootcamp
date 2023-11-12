@@ -22,3 +22,20 @@ export const addSighting = async (date, location, notes) => {
     .then((res) => console.log(res))
     .catch((err) => console.log(err));
 };
+
+export const getSpecificComments = async (report_number) => {
+  const commentData = await axios.get(
+    `${url}/sightings/${report_number}/comments`
+  );
+  return commentData;
+};
+
+export const addComment = async (report_number, date, content) => {
+  await axios
+    .post(`${url}/sightings/${report_number}/comments`, {
+      date: date,
+      content: content,
+    })
+    .then((res) => console.log(res))
+    .catch((err) => console.log(err));
+};
