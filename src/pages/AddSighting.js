@@ -1,17 +1,45 @@
 import React, { useState, useEffect } from "react";
-import { addSighting } from "../api/backend";
+import { addSighting, getCategories } from "../api/backend";
 import { useNavigate } from "react-router";
+import Select from "react-select";
 
 const AddSighting = () => {
   const [sightingDate, setSightingDate] = useState("");
   const [sightingLocation, setSightingLocation] = useState("");
   const [sightingNotes, setSightingNotes] = useState("");
+  const [allCategories, setAllCategories] = useState([]);
+  const [selectedCategories, setSelectedCategories] = useState([]);
 
   const navigate = useNavigate();
 
+  // useEffect(() => {
+  //   const fetchCategories = async () => {
+  //     const categoriesList = await getCategories();
+  //     const categories = [];
+  //     for (let category of categoriesList.data) {
+  //       categories.push(category.name);
+  //     }
+  //     setAllCategories(categories);
+  //   };
+  //   fetchCategories();
+  // }, []);
+
+  useEffect(() => {
+    const fetchCategories = async () => {
+      const categoriesList = await getCategories();
+      setAllCategories(categoriesList.data);
+    };
+    fetchCategories();
+  }, []);
+
   const submit = async () => {
     if (sightingDate && sightingLocation && sightingNotes) {
-      addSighting(sightingDate, sightingLocation, sightingNotes);
+      addSighting(
+        sightingDate,
+        sightingLocation,
+        sightingNotes,
+        selectedCategories
+      );
       alert("Sighting added.");
     } else {
       alert("Please enter all fields.");
@@ -71,6 +99,43 @@ const AddSighting = () => {
             }}
           />
         </div>
+        <div className="flex flex-col gap-2">
+          <div className="font-semibold text-gray-600">
+            Category of sighting:
+          </div>
+
+          {/* ISSUE: cant grab multiple selections from tailwind select */}
+          <select
+            multiple
+            className="block border-2 rounded-sm p-2"
+            value={selectedCategories}
+            onChange={(e) => {
+              console.log(e);
+              // setSelectedCategories([
+              //   ...e.target.selectedOptions.map((option) => option.value),
+              // ]);
+              setSelectedCategories(
+                Array.from(e.target.selectedOptions, (item) =>
+                  parseInt(item.value)
+                )
+              );
+            }}
+          >
+            {allCategories.map((category) => (
+              <option value={category.id}>{category.name}</option>
+            ))}
+          </select>
+        </div>
+        <button
+          onClick={() =>
+            // console.log([
+            //   ...selectedCategories.map((category) => category.name),
+            // ])
+            console.log(selectedCategories)
+          }
+        >
+          Log categories
+        </button>
         <button
           className="block w-[150px] leading-6 border-2 py-2 rounded-sm self-center"
           onClick={submit}

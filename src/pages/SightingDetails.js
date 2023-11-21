@@ -53,6 +53,19 @@ const SightingDetails = () => {
               </div>
               <div>{sighting.notes ? sighting.notes : "-"}</div>
             </div>
+            <div className="flex flex-col gap-2">
+              <div className="font-semibold text-gray-600 w-[150px]">
+                Category:
+              </div>
+              <div className="flex gap-2">
+                {sighting.categories && sighting.categories.length > 0
+                  ? sighting.categories.map((category) => (
+                      <p>{category.name}</p>
+                    ))
+                  : "-"}
+              </div>
+            </div>
+            <button onClick={() => console.log(sighting)}>Log Sighting</button>
           </div>
           <div className="text-xl font-bold text-gray-600 my-6">Comments</div>
 

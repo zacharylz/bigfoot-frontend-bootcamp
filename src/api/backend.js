@@ -7,17 +7,23 @@ export const getSightings = async () => {
   return sightings;
 };
 
+export const getCategories = async () => {
+  const categories = await axios.get(`${url}/categories`);
+  return categories;
+};
+
 export const getSpecificSighting = async (report_number) => {
   const sightingData = await axios.get(`${url}/sightings/${report_number}`);
   return sightingData;
 };
 
-export const addSighting = async (date, location, notes) => {
+export const addSighting = async (date, location, notes, categories) => {
   await axios
     .post(`${url}/sightings`, {
       date: date,
       location: location,
       notes: notes,
+      categories: categories,
     })
     .then((res) => console.log(res))
     .catch((err) => console.log(err));
